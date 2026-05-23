@@ -3,563 +3,398 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Тест: готов ли ваш подросток выбрать профессию?</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Тест: готов ли ваш подросток выбрать профессию? | Самат Панов</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --purple: #534AB7;
-    --purple-dark: #3C3489;
-    --purple-light: #EEEDFE;
-    --purple-mid: #AFA9EC;
-    --text: #1A1A2E;
-    --text-muted: #6B6B80;
-    --text-hint: #A0A0B0;
-    --bg: #FFFFFF;
-    --bg-soft: #F7F7FC;
-    --border: rgba(83,74,183,0.15);
-    --border-strong: rgba(83,74,183,0.3);
-    --green-bg: #EAF3DE; --green-text: #3B6D11;
-    --amber-bg: #FAEEDA; --amber-text: #854F0B;
-    --red-bg: #FCEBEB; --red-text: #A32D2D;
-    --radius: 12px;
-    --radius-sm: 8px;
-  }
-
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Manrope', sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f7f7f5;
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    padding: 24px 16px;
+    padding: 2rem 1rem 3rem;
   }
-
-  .container {
+  .quiz-wrap {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #e8e6df;
+    padding: 2rem;
+    max-width: 580px;
     width: 100%;
-    max-width: 560px;
   }
-
-  .screen { display: none; animation: fadeIn 0.3s ease; }
-  .screen.active { display: block; }
-  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-
-  /* ── INTRO ── */
-  .intro-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--purple-light);
-    color: var(--purple);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 5px 12px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    letter-spacing: 0.02em;
-  }
-  .intro-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--purple);
-    border-radius: 50%;
-  }
-  .intro-title {
-    font-size: 26px;
-    font-weight: 600;
-    line-height: 1.35;
-    color: var(--text);
-    margin-bottom: 14px;
-  }
-  .intro-title em { font-style: normal; color: var(--purple); }
-  .intro-sub {
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 28px;
-  }
-  .intro-meta {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 32px;
-    padding: 14px 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .meta-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-  .meta-icon {
-    width: 28px; height: 28px;
-    background: var(--purple-light);
-    border-radius: var(--radius-sm);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-  }
-  .btn-start {
-    width: 100%;
-    padding: 15px;
-    background: var(--purple);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Manrope', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-  }
-  .btn-start:hover { background: var(--purple-dark); }
-  .btn-start:active { transform: scale(0.99); }
-  .intro-note {
-    text-align: center;
-    font-size: 12px;
-    color: var(--text-hint);
-    margin-top: 10px;
-  }
-
-  /* ── QUIZ ── */
-  .progress-wrap { margin-bottom: 24px; }
-  .progress-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  .progress-label { font-size: 12px; color: var(--text-hint); }
-  .progress-count { font-size: 12px; font-weight: 600; color: var(--purple); }
-  .progress-track {
-    height: 3px;
-    background: var(--border);
+  .progress-bar {
+    height: 4px;
+    background: #e8e6df;
     border-radius: 2px;
+    margin-bottom: 1.75rem;
+    overflow: hidden;
   }
   .progress-fill {
     height: 100%;
-    background: var(--purple);
+    background: #1D6B5A;
     border-radius: 2px;
-    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+    transition: width 0.4s ease;
   }
-  .q-text {
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: var(--text);
-    margin-bottom: 20px;
-  }
-  .options { display: flex; flex-direction: column; gap: 8px; }
-  .opt {
+  .step-label {
+    font-size: 13px;
+    color: #888780;
+    margin-bottom: 0.6rem;
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 13px 16px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    color: var(--text);
+    justify-content: space-between;
+  }
+  .question-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #2C2C2A;
     line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  .options-grid { display: flex; flex-direction: column; gap: 10px; }
+  .opt-btn {
+    background: #fff;
+    border: 1px solid #d3d1c7;
+    border-radius: 10px;
+    padding: 14px 18px;
     text-align: left;
-    transition: border-color 0.15s, background 0.15s;
-    width: 100%;
-  }
-  .opt-circle {
-    width: 18px; height: 18px;
-    border: 1.5px solid var(--border-strong);
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 1px;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .opt:hover { border-color: var(--purple-mid); background: var(--bg-soft); }
-  .opt.selected {
-    border-color: var(--purple);
-    background: var(--purple-light);
-    color: var(--purple-dark);
-  }
-  .opt.selected .opt-circle {
-    border-color: var(--purple);
-    background: var(--purple);
-    box-shadow: inset 0 0 0 3px #fff;
-  }
-  .btn-next {
-    width: 100%;
-    margin-top: 16px;
-    padding: 13px;
-    background: var(--purple);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 15px;
+    color: #2C2C2A;
     cursor: pointer;
-    opacity: 0.35;
-    pointer-events: none;
-    transition: opacity 0.2s, background 0.2s;
-  }
-  .btn-next.ready { opacity: 1; pointer-events: auto; }
-  .btn-next.ready:hover { background: var(--purple-dark); }
-
-  /* ── RESULT ── */
-  .scores {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-  .score-card {
-    background: var(--bg-soft);
-    border-radius: var(--radius-sm);
-    padding: 14px 10px;
-    text-align: center;
-  }
-  .score-n {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--purple);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .score-l {
-    font-size: 11px;
-    color: var(--text-hint);
-    line-height: 1.3;
-  }
-  .result-card {
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-  .result-card.low { background: #F0F7E8; border: 1px solid #C0DD97; }
-  .result-card.mid { background: #FDF5E8; border: 1px solid #FAC775; }
-  .result-card.high { background: #FEF0F0; border: 1px solid #F09595; }
-  .result-tags { margin-bottom: 12px; }
-  .tag {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-    margin-right: 6px;
-  }
-  .tag.low { background: var(--green-bg); color: var(--green-text); }
-  .tag.mid { background: var(--amber-bg); color: var(--amber-text); }
-  .tag.high { background: var(--red-bg); color: var(--red-text); }
-  .result-title {
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 10px;
+    transition: all 0.15s ease;
     line-height: 1.4;
   }
-  .result-desc {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 14px;
-  }
-  .result-signs { display: flex; flex-direction: column; gap: 8px; }
-  .sign {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.5;
-  }
-  .sign-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--purple);
-    flex-shrink: 0;
-    margin-top: 6px;
-  }
-  .cta-card {
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
-    padding: 20px;
-    background: var(--bg);
-    margin-bottom: 12px;
-  }
-  .cta-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .cta-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
-  .btn-wa {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    padding: 14px;
-    background: #25D366;
+  .opt-btn:hover { border-color: #1D6B5A; background: #E1F5EE; color: #04342C; }
+  .opt-btn.selected { border-color: #1D6B5A; background: #E1F5EE; color: #04342C; font-weight: 500; }
+  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
+  .btn-back { background: none; border: none; font-size: 14px; color: #888780; cursor: pointer; padding: 8px 0; }
+  .btn-back:hover { color: #2C2C2A; }
+  .btn-next {
+    background: #1D6B5A;
     color: #fff;
     border: none;
-    border-radius: var(--radius-sm);
-    font-family: 'Manrope', sans-serif;
+    border-radius: 10px;
+    padding: 12px 28px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.1s;
+    transition: opacity 0.15s;
   }
-  .btn-wa:hover { background: #1ebe5d; }
-  .btn-wa:active { transform: scale(0.99); }
-  .btn-wa svg { flex-shrink: 0; }
-  .form-note { text-align: center; font-size: 11px; color: var(--text-hint); margin-top: 10px; }
-  .result-footer {
-    font-size: 12px;
-    color: var(--text-hint);
-    line-height: 1.6;
-    text-align: center;
-  }
-  .result-footer a { color: var(--purple); text-decoration: none; }
-  .result-footer a:hover { text-decoration: underline; }
+  .btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-next:not(:disabled):hover { opacity: 0.88; }
 
-  /* ── DONE ── */
-  .done-wrap {
-    text-align: center;
-    padding: 40px 20px;
+  /* Intro */
+  .intro-title { font-size: 22px; font-weight: 600; color: #2C2C2A; line-height: 1.35; margin-bottom: 0.75rem; }
+  .intro-sub { font-size: 15px; color: #5F5E5A; line-height: 1.6; margin-bottom: 1.5rem; }
+  .intro-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.75rem; }
+  .chip {
+    background: #f7f7f5;
+    border: 1px solid #e8e6df;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 13px;
+    color: #5F5E5A;
   }
-  .done-icon {
-    width: 56px; height: 56px;
-    background: var(--purple-light);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 24px;
-  }
-  .done-title { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
-  .done-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 28px; }
-  .btn-cta-final {
-    display: inline-block;
-    padding: 13px 32px;
-    background: var(--purple);
+  .btn-start {
+    width: 100%;
+    background: #1D6B5A;
     color: #fff;
     border: none;
-    border-radius: var(--radius);
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s;
+    transition: opacity 0.15s;
   }
-  .btn-cta-final:hover { background: var(--purple-dark); }
-  .done-note {
-    margin-top: 14px;
-    font-size: 12px;
-    color: var(--text-hint);
+  .btn-start:hover { opacity: 0.88; }
+
+  /* Result */
+  .result-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 1rem;
   }
+  .badge-yellow { background: #FAEEDA; color: #633806; }
+  .badge-orange { background: #FAECE7; color: #4A1B0C; }
+  .badge-red { background: #FCEBEB; color: #501313; }
+  .result-title { font-size: 21px; font-weight: 600; color: #2C2C2A; margin-bottom: 0.75rem; line-height: 1.35; }
+  .result-desc { font-size: 15px; color: #5F5E5A; line-height: 1.7; margin-bottom: 1.5rem; }
+  .tips-card { background: #f7f7f5; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  .tips-label { font-size: 11px; font-weight: 700; color: #888780; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.75rem; }
+  .tip-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; font-size: 14px; color: #2C2C2A; line-height: 1.5; }
+  .tip-dot {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #E1F5EE; color: #085041;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .cta-block { background: #E1F5EE; border: 1px solid #5DCAA5; border-radius: 12px; padding: 1.25rem 1.5rem; }
+  .cta-title { font-size: 15px; font-weight: 600; color: #085041; margin-bottom: 0.4rem; }
+  .cta-sub { font-size: 13px; color: #0F6E56; margin-bottom: 1rem; line-height: 1.5; }
+  .btn-wa {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #1D6B5A; color: #fff; text-decoration: none;
+    border-radius: 10px; padding: 12px 22px;
+    font-size: 14px; font-weight: 600; transition: opacity 0.15s;
+  }
+  .btn-wa:hover { opacity: 0.85; }
+  .btn-wa svg { width: 18px; height: 18px; }
+  .restart-link { display: block; text-align: center; margin-top: 1.25rem; font-size: 13px; color: #888780; cursor: pointer; }
+  .restart-link:hover { color: #2C2C2A; }
 
   @media (max-width: 480px) {
-    .intro-title { font-size: 22px; }
-    .intro-meta { flex-wrap: wrap; gap: 12px; }
-    .scores { grid-template-columns: repeat(3, 1fr); }
+    body { padding: 0; }
+    .quiz-wrap { border-radius: 0; border: none; padding: 1.5rem 1rem 2rem; min-height: 100vh; }
+    .intro-title, .result-title { font-size: 19px; }
+    .question-text { font-size: 17px; }
   }
 </style>
 </head>
 <body>
+<div class="quiz-wrap">
 
-<div class="container">
-
-  <!-- INTRO -->
-  <div class="screen active" id="s-intro">
-    <div class="intro-badge">Бесплатно · 2 минуты</div>
-    <h1 class="intro-title">Готов ли ваш подросток к <em>осознанному выбору профессии?</em></h1>
-    <p class="intro-sub">10 вопросов — и вы узнаете, на каком этапе сейчас ваш ребёнок и что конкретно поможет ему двигаться вперёд.</p>
-    <div class="intro-meta">
-      <div class="meta-item"><div class="meta-icon">✦</div>10 вопросов</div>
-      <div class="meta-item"><div class="meta-icon">◷</div>2 минуты</div>
-      <div class="meta-item"><div class="meta-icon">↳</div>Персональный результат</div>
+  <div id="intro">
+    <p class="intro-title">Готов ли ваш подросток к осознанному выбору профессии?</p>
+    <p class="intro-sub">8 вопросов — и вы узнаете тип ситуации вашего ребёнка и конкретные шаги, которые помогут двигаться вперёд.</p>
+    <div class="intro-chips">
+      <span class="chip">⏱ 3 минуты</span>
+      <span class="chip">👨‍👩‍👦 для родителей 13–17 лет</span>
+      <span class="chip">🔒 бесплатно</span>
     </div>
-    <button class="btn-start" onclick="startQuiz()">Пройти тест бесплатно →</button>
-    <p class="intro-note">Для родителей подростков 13–17 лет</p>
+    <button class="btn-start" onclick="startQuiz()">Пройти тест →</button>
   </div>
 
-  <!-- QUIZ -->
-  <div class="screen" id="s-quiz">
-    <div class="progress-wrap">
-      <div class="progress-header">
-        <span class="progress-label">Прогресс</span>
-        <span class="progress-count" id="p-count">1 / 10</span>
-      </div>
-      <div class="progress-track"><div class="progress-fill" id="p-fill" style="width:10%"></div></div>
+  <div id="quiz-body" style="display:none">
+    <div class="step-label">
+      <span id="step-counter">Вопрос 1 из 8</span>
+      <span id="step-pct">0%</span>
     </div>
-    <p class="q-text" id="q-text"></p>
-    <div class="options" id="options"></div>
-    <button class="btn-next" id="btn-next" onclick="nextQ()">Следующий вопрос →</button>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <p class="question-text" id="q-text"></p>
+    <div class="options-grid" id="options-grid"></div>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="goBack()">← Назад</button>
+      <button class="btn-next" id="btn-next" onclick="goNext()" disabled>Далее →</button>
+    </div>
   </div>
 
-  <!-- RESULT -->
-  <div class="screen" id="s-result">
-    <div class="scores" id="scores"></div>
-    <div class="result-card" id="r-card">
-      <div class="result-tags" id="r-tags"></div>
-      <div class="result-title" id="r-title"></div>
-      <div class="result-desc" id="r-desc"></div>
-      <div class="result-signs" id="r-signs"></div>
-    </div>
-    <div class="cta-card">
-      <div class="cta-title">Получить персональный разбор результата</div>
-      <div class="cta-desc">Напишите мне в WhatsApp — отвечу лично, расскажу что делать дальше и отвечу на ваши вопросы. Без скриптов и навязчивых продаж.</div>
-      <a id="wa-btn" class="btn-wa" href="#" target="_blank">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.116 1.527 5.845L.057 23.428a.5.5 0 0 0 .609.61l5.71-1.494A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.9 9.9 0 0 1-5.031-1.369l-.361-.214-3.732.977.999-3.645-.235-.374A9.858 9.858 0 0 1 2.1 12C2.1 6.533 6.533 2.1 12 2.1c5.468 0 9.9 4.433 9.9 9.9 0 5.468-4.432 9.9-9.9 9.9z"/></svg>
-        Написать в WhatsApp
-      </a>
-      <p class="form-note">Отвечаю в течение 2 часов · Без навязчивых звонков</p>
-    </div>
-    <p class="result-footer">
-      Хотите разобраться быстрее?
-      <a href="https://www.panovsamat.com/trening-dlya-podrostkov-samoopredelenie-i-vybor-karery-proforientaciya">Узнайте о тренинге →</a>
-    </p>
-  </div>
-
-  <div class="screen" id="s-done">
-    <div class="done-wrap">
-      <div class="done-icon">✓</div>
-      <h2 class="done-title">Самат уже видит ваш результат</h2>
-      <p class="done-desc">Сообщение с результатом теста отправлено в WhatsApp.<br>Самат ответит лично в течение 2 часов.</p>
-      <a class="btn-cta-final" href="https://www.panovsamat.com/trening-dlya-podrostkov-samoopredelenie-i-vybor-karery-proforientaciya">
-        Узнать о тренинге →
-      </a>
-      <p class="done-note">Самат Панов · panovsamat.com</p>
-    </div>
-  </div>
+  <div id="result-wrap" style="display:none"></div>
 
 </div>
 
 <script>
-const qs=[
-  {t:"Когда вы спрашиваете ребёнка «кем ты хочешь стать?» — что чаще всего слышите?",
-   o:[["Конкретный ответ с объяснением",0],["Называет что-то, но без уверенности",1],["«Не знаю» или молчание",2],["Раздражение или уход от темы",3]]},
-  {t:"Насколько ребёнок понимает свои сильные стороны — то, что у него получается лучше всего?",
-   o:[["Хорошо понимает и может назвать",0],["Догадывается, но не уверен",1],["Затрудняется ответить",2],["Считает, что у него нет сильных сторон",3]]},
-  {t:"Как ребёнок относится к своим увлечениям и интересам?",
-   o:[["Есть чёткие интересы, развивает их целенаправленно",0],["Есть интересы, но «для себя», не связывает с профессией",1],["Интересы меняются, нет ничего устойчивого",2],["Говорит, что ничего не интересно",3]]},
-  {t:"Если предложить ребёнку самостоятельно изучить несколько профессий — что произойдёт?",
-   o:[["С интересом возьмётся за это",0],["Согласится, но без особого энтузиазма",1],["Нужно будет сильно мотивировать",2],["Откажется или отложит на потом",3]]},
-  {t:"Как ребёнок реагирует на разговоры о будущем и выборе профессии?",
-   o:[["Открыто, с интересом обсуждает",0],["Слушает, но без инициативы",1],["Уходит от темы",2],["Раздражается или конфликтует",3]]},
-  {t:"Как ребёнок принимает решения — в учёбе, хобби, повседневных ситуациях?",
-   o:[["Самостоятельно и обдуманно",0],["С некоторыми колебаниями, но принимает",1],["Часто просит взрослых решить за него",2],["Избегает решений, тянет время",3]]},
-  {t:"Насколько ребёнок знаком с реальным рынком профессий — не только «врач/юрист/айтишник»?",
-   o:[["Хорошо ориентируется, знает современные профессии",0],["Знает базовые, о новых почти не слышал",1],["Имеет очень смутное представление",2],["Не интересовался этим вообще",3]]},
-  {t:"Есть ли у ребёнка ощущение, что он «отстаёт» — все уже определились, а он нет?",
-   o:[["Нет, относится к этому спокойно",0],["Иногда беспокоится, но не сильно",1],["Да, это его тревожит",2],["Это серьёзный источник стресса для него",3]]},
-  {t:"Как ваш ребёнок относится к ошибкам и неудачам?",
-   o:[["Воспринимает как опыт, двигается дальше",0],["Расстраивается, но восстанавливается",1],["Долго переживает, теряет мотивацию",2],["Старается избегать всего, где можно ошибиться",3]]},
-  {t:"Если честно — насколько вы сами уверены, что ваш ребёнок сделает осознанный выбор профессии?",
-   o:[["Достаточно уверен",0],["Немного тревожусь",1],["Беспокоюсь довольно сильно",2],["Очень переживаю — нет никакой ясности",3]]}
+const questions = [
+  {
+    q: "Сколько лет вашему подростку?",
+    opts: ["13–14 лет", "15–16 лет", "17 лет и старше"],
+    scores: [0, 1, 2]
+  },
+  {
+    q: "Когда вы спрашиваете о профессии, он обычно...",
+    opts: [
+      "Молчит или уходит от темы",
+      "Говорит «не знаю» и раздражается",
+      "Называет что-то, но без особой уверенности",
+      "Уже понимает направление, но хочет разобраться глубже"
+    ],
+    scores: [2, 2, 1, 0]
+  },
+  {
+    q: "Как он относится к учёбе?",
+    opts: [
+      "Учится хорошо, но не понимает, зачем это нужно",
+      "Учится средне — интерес к предметам слабый",
+      "Не хочет учиться, мотивации нет",
+      "Учится с интересом хотя бы к нескольким предметам"
+    ],
+    scores: [1, 1, 2, 0]
+  },
+  {
+    q: "Есть ли у него занятия или хобби вне школы?",
+    opts: [
+      "Да, несколько — спорт, творчество, секции",
+      "Есть одно постоянное занятие",
+      "Раньше было, сейчас бросил",
+      "Нет ничего, только школа и телефон"
+    ],
+    scores: [0, 0, 1, 2]
+  },
+  {
+    q: "Вы знаете, что ему по-настоящему нравится делать?",
+    opts: [
+      "Да, точно знаю — он сам говорит об этом",
+      "Примерно понимаю, но не уверена",
+      "Не знаю, он сам не понимает",
+      "Нравится всё понемногу или ничего конкретного"
+    ],
+    scores: [0, 1, 2, 1]
+  },
+  {
+    q: "Он говорит с вами о своём будущем?",
+    opts: [
+      "Совсем нет — тема закрытая",
+      "Редко, и то без деталей",
+      "Иногда — когда сам захочет",
+      "Да, мы открыто обсуждаем планы"
+    ],
+    scores: [2, 2, 1, 0]
+  },
+  {
+    q: "Сколько времени до окончания школы?",
+    opts: [
+      "Больше 3 лет — времени много",
+      "2–3 года — уже думаем об этом",
+      "Меньше 2 лет — ЕНТ/поступление скоро",
+      "Последний год — решение нужно сейчас"
+    ],
+    scores: [0, 1, 2, 3]
+  },
+  {
+    q: "Что вас больше всего беспокоит прямо сейчас?",
+    opts: [
+      "Подросток вообще не понимает себя и свои интересы",
+      "Есть интересы, но непонятно, как связать их с профессией",
+      "Давление ЕНТ и поступления — нет времени разбираться",
+      "Боюсь, что выберет «неправильно» или под чужим влиянием"
+    ],
+    scores: [2, 1, 2, 1]
+  }
 ];
 
-let cur=0, score=0, sel=-1;
+const results = [
+  {
+    range: [0, 5],
+    badge: "🟡 Исследователь",
+    badgeClass: "badge-yellow",
+    title: "Ваш подросток в начале пути — и это нормально",
+    desc: "Неопределённость в 13–15 лет — это не проблема, а возраст. У него ещё есть время, но уже сейчас важно помочь ему начать исследовать себя — через интересы, хобби, общение с людьми разных профессий. Давление и «правильные ответы» здесь не помогут.",
+    tips: [
+      "Разговаривайте о профессиях без давления — через истории других людей",
+      "Поддержите любое новое хобби или занятие, даже если оно кажется «несерьёзным»",
+      "Дайте подростку право не знать — и помогите ему исследовать"
+    ]
+  },
+  {
+    range: [6, 11],
+    badge: "🟠 На перепутье",
+    badgeClass: "badge-orange",
+    title: "Интересы есть, но связи с профессией пока нет",
+    desc: "Ваш подросток что-то знает о себе, но не умеет это «перевести» в конкретное направление. Он чувствует неопределённость, и это вызывает тревогу — у него и у вас. Здесь важна структурированная работа: не ещё один тест, а глубокий разбор с инструментами.",
+    tips: [
+      "Помогите подростку увидеть связь между тем, что он любит и что умеет",
+      "Предложите пообщаться с реальными людьми в интересных ему профессиях",
+      "Избегайте фразы «тебе нужно определиться» — замените на «давай разберёмся вместе»"
+    ]
+  },
+  {
+    range: [12, 100],
+    badge: "🔴 Давление нарастает",
+    badgeClass: "badge-red",
+    title: "Времени мало, тревога высокая — нужен чёткий план",
+    desc: "У вашего подростка мало времени до важных решений, а ясности пока нет. Это создаёт стресс и для него, и для вас. В этой ситуации хаотичные советы и поиск в интернете не помогут — нужен структурный подход, который за короткое время даст конкретный результат.",
+    tips: [
+      "Не ждите, что «само придёт» — действуйте уже сейчас",
+      "Снизьте давление в разговорах: подросток в стрессе думает хуже",
+      "Ищите поддержку эксперта, который работает именно с подростками"
+    ]
+  }
+];
 
-function show(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+let current = 0;
+let answers = new Array(questions.length).fill(null);
+
+function startQuiz() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('quiz-body').style.display = 'block';
+  renderQuestion();
 }
 
-function startQuiz(){ show('s-quiz'); renderQ(); }
+function renderQuestion() {
+  const q = questions[current];
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('step-counter').textContent = 'Вопрос ' + (current + 1) + ' из ' + questions.length;
+  const pct = Math.round((current / questions.length) * 100);
+  document.getElementById('step-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
 
-function renderQ(){
-  const q=qs[cur];
-  document.getElementById('p-count').textContent=(cur+1)+' / '+qs.length;
-  document.getElementById('p-fill').style.width=(((cur+1)/qs.length)*100)+'%';
-  document.getElementById('q-text').textContent=q.t;
-  const wrap=document.getElementById('options');
-  wrap.innerHTML='';
-  q.o.forEach(([label,val],i)=>{
-    const btn=document.createElement('button');
-    btn.className='opt';
-    btn.innerHTML='<span class="opt-circle"></span><span>'+label+'</span>';
-    btn.onclick=()=>select(i,val);
-    wrap.appendChild(btn);
+  const grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  q.opts.forEach(function(opt, i) {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn' + (answers[current] === i ? ' selected' : '');
+    btn.textContent = opt;
+    btn.onclick = function() { selectOption(i); };
+    grid.appendChild(btn);
   });
-  sel=-1;
-  document.getElementById('btn-next').classList.remove('ready');
-  if(cur===qs.length-1) document.getElementById('btn-next').textContent='Узнать результат →';
+
+  document.getElementById('btn-next').disabled = answers[current] === null;
+  document.getElementById('btn-back').style.visibility = current === 0 ? 'hidden' : 'visible';
+  document.getElementById('btn-next').textContent = current === questions.length - 1 ? 'Узнать результат →' : 'Далее →';
 }
 
-function select(idx,val){
-  document.querySelectorAll('.opt').forEach(b=>b.classList.remove('selected'));
-  document.querySelectorAll('.opt')[idx].classList.add('selected');
-  sel=val;
-  document.getElementById('btn-next').classList.add('ready');
+function selectOption(i) {
+  answers[current] = i;
+  document.querySelectorAll('.opt-btn').forEach(function(b, idx) {
+    b.classList.toggle('selected', idx === i);
+  });
+  document.getElementById('btn-next').disabled = false;
 }
 
-function nextQ(){
-  if(sel<0)return;
-  score+=sel; cur++;
-  if(cur<qs.length){ renderQ(); }
-  else { buildResult(); show('s-result'); }
+function goNext() {
+  if (answers[current] === null) return;
+  if (current < questions.length - 1) { current++; renderQuestion(); }
+  else showResult();
 }
 
-function buildResult(){
-  const max=qs.length*3;
-  const pct=Math.round((score/max)*100);
-
-  let lvl, title, desc, signs, cardClass, tagClass, tagLabel1, tagLabel2, waText;
-
-  if(score<=8){
-    lvl='Хороший старт'; cardClass='low'; tagClass='low';
-    tagLabel1='Осознанность: высокая'; tagLabel2='Готовность: есть';
-    title='Ваш подросток уже в хорошей позиции';
-    desc='Он понимает себя лучше, чем большинство сверстников. Есть базовая осознанность и готовность к размышлению о будущем. Сейчас важно не «додавить», а дать структуру — помочь превратить ощущения в конкретный план.';
-    signs=['Продолжайте поддерживать разговоры о будущем — без давления и оценок','Помогите изучить реальные современные профессии, а не только очевидные','Тренинг даст структуру и уверенность в уже имеющихся ощущениях'];
-    waText='Здравствуйте, Самат! Прошла тест на сайте.\n\n📊 Результат: *Хороший старт* ('+score+' из '+max+' баллов)\nМой подросток в целом понимает себя, но хочу помочь ему структурировать выбор профессии.\n\nМожете рассказать подробнее о тренинге?';
-  } else if(score<=18){
-    lvl='Переходный этап'; cardClass='mid'; tagClass='mid';
-    tagLabel1='Осознанность: средняя'; tagLabel2='Требует внимания';
-    title='Есть понимание, но нет уверенности';
-    desc='Подросток что-то чувствует и догадывается о себе, но эти ощущения не сложились в ясную картину. Он может называть профессии, но сам не уверен — «его» это или нет. Это нормальный этап, который можно пройти быстро с правильной поддержкой.';
-    signs=['Не торопите с выбором — давление усиливает тревогу, а не снимает её','Помогите сформулировать его ценности и интересы словами — это ключевой шаг','Профессиональная работа в группе со сверстниками даёт быстрый результат'];
-    waText='Здравствуйте, Самат! Прошла тест на сайте.\n\n📊 Результат: *Переходный этап* ('+score+' из '+max+' баллов)\nМой подросток что-то чувствует, но нет уверенности и ясного направления.\n\nХочу понять, как тренинг может помочь в нашей ситуации.';
-  } else {
-    lvl='Нужна поддержка сейчас'; cardClass='high'; tagClass='high';
-    tagLabel1='Осознанность: низкая'; tagLabel2='Риск: растёт тревога';
-    title='Ребёнок потерян — и это требует действия';
-    desc='Подросток не понимает себя, избегает темы будущего и, скорее всего, чувствует растущее давление. Без внешней помощи ситуация будет усугубляться: либо выбор будет сделан под давлением, либо не сделан вовсе.';
-    signs=['Не давите — это усиливает блок, а не снимает его','Ребёнку нужно безопасное пространство, где можно исследовать себя без осуждения','Специализированный тренинг по самоопределению — один из самых эффективных форматов'];
-    waText='Здравствуйте, Самат! Прошла тест на сайте.\n\n📊 Результат: *Нужна поддержка сейчас* ('+score+' из '+max+' баллов)\nМой подросток избегает темы будущего, нет никакой ясности. Беспокоюсь.\n\nХочу разобраться, что делать прямо сейчас.';
-  }
-
-  // Формируем WhatsApp-ссылку с готовым сообщением
-  // ЗАМЕНИТЕ НОМЕР на ваш WhatsApp с кодом страны (без + и пробелов)
-  const phone = '77078622268';
-  const waUrl = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(waText);
-  document.getElementById('wa-btn').href = waUrl;
-
-  document.getElementById('r-card').className='result-card '+cardClass;
-  document.getElementById('r-tags').innerHTML=
-    '<span class="tag '+tagClass+'">'+tagLabel1+'</span><span class="tag '+tagClass+'">'+tagLabel2+'</span>';
-  document.getElementById('r-title').textContent=title;
-  document.getElementById('r-desc').textContent=desc;
-  document.getElementById('r-signs').innerHTML=signs.map(s=>
-    '<div class="sign"><div class="sign-dot"></div><span>'+s+'</span></div>'
-  ).join('');
-  document.getElementById('scores').innerHTML=
-    '<div class="score-card"><div class="score-n">'+score+'</div><div class="score-l">баллов из '+max+'</div></div>'+
-    '<div class="score-card"><div class="score-n">'+pct+'%</div><div class="score-l">уровень тревоги</div></div>'+
-    '<div class="score-card"><div class="score-n">'+lvl.split(' ')[0]+'</div><div class="score-l">'+lvl.split(' ').slice(1).join(' ')+'</div></div>';
+function goBack() {
+  if (current > 0) { current--; renderQuestion(); }
 }
 
-function submitLead(){
-  const email=document.getElementById('inp-email');
-  if(!email.value.trim()||!email.value.includes('@')){
-    email.classList.add('error');
-    email.focus();
-    return;
-  }
-  email.classList.remove('error');
-  show('s-done');
+function calcScore() {
+  var total = 0;
+  answers.forEach(function(a, qi) { if (a !== null) total += questions[qi].scores[a]; });
+  return total;
+}
+
+function showResult() {
+  document.getElementById('quiz-body').style.display = 'none';
+  var score = calcScore();
+  var r = results[0];
+  if (score >= 6 && score <= 11) r = results[1];
+  if (score >= 12) r = results[2];
+
+  var waText = encodeURIComponent('Здравствуйте, Самат! Я прошла тест и получила результат: "' + r.title + '". Хочу узнать подробнее о тренинге.');
+  var waUrl = 'https://wa.me/77078622268?text=' + waText;
+
+  var wrap = document.getElementById('result-wrap');
+  wrap.style.display = 'block';
+  wrap.innerHTML = '<span class="result-badge ' + r.badgeClass + '">' + r.badge + '</span>' +
+    '<p class="result-title">' + r.title + '</p>' +
+    '<p class="result-desc">' + r.desc + '</p>' +
+    '<div class="tips-card"><p class="tips-label">Что поможет прямо сейчас</p>' +
+    r.tips.map(function(t, i) {
+      return '<div class="tip-item"><span class="tip-dot">' + (i+1) + '</span><span>' + t + '</span></div>';
+    }).join('') + '</div>' +
+    '<div class="cta-block"><p class="cta-title">Хотите разобраться глубже?</p>' +
+    '<p class="cta-sub">Самат Панов лично ответит на ваши вопросы и расскажет, подойдёт ли тренинг вашему подростку. Бесплатно, без навязывания.</p>' +
+    '<a class="btn-wa" href="' + waUrl + '" target="_blank">' +
+    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>' +
+    ' Написать в WhatsApp</a></div>' +
+    '<span class="restart-link" onclick="restart()">← Пройти тест заново</span>';
+}
+
+function restart() {
+  current = 0;
+  answers = new Array(questions.length).fill(null);
+  document.getElementById('result-wrap').style.display = 'none';
+  document.getElementById('result-wrap').innerHTML = '';
+  document.getElementById('quiz-body').style.display = 'block';
+  renderQuestion();
 }
 </script>
 </body>
